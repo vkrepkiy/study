@@ -9,7 +9,7 @@
 # долларов США, при производстве стола - 80 долларов США.
 
 # %%
-from pulp import LpMaximize, LpProblem, LpVariable, LpStatus
+from pulp import LpMaximize, LpProblem, LpVariable, LpStatus, value
 
 prob = LpProblem("FindMaximumIncome", LpMaximize)
 
@@ -28,4 +28,3 @@ for v in prob.variables():
     print(v.name, "=", v.varValue)
 
 print("Total profit = ", value(prob.objective))
-
