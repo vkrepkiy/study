@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 # Mutual exclusion demonstration on Python 3 with Lock
 
 from threading import Lock, Thread

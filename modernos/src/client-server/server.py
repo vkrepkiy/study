@@ -1,4 +1,4 @@
-#!/usr/bin/env pyton3
+#!/usr/bin/env python
 
 from time import sleep
 from shared import getFifo

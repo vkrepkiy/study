@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 # Semaphore + mutex example for Python 3
 
 from threading import BoundedSemaphore, RLock, Thread
