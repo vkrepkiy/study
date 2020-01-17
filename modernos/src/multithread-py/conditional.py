@@ -1,44 +1,47 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+# coding: utf-8
 
 import threading
-import time
-import logging
+from time import sleep
+from termcolor import colored
 
-# Setup logger
-logging.basicConfig(level=logging.DEBUG,
-                    format='(%(threadName)-9s) %(message)s',)
-
+print('Программа предоставляет пример 2-х процессов, которые в event loop проверяют значение переменной\n')
 
 # Define consumer fn
-def consumer(cv):
-    logging.debug('Consumer thread started ...')
+def client(cv):
+    print('Процесс запущен')
     with cv:
-        logging.debug('Consumer waiting ...')
         cv.wait()
-        logging.debug('Consumer consumed the resource')
+        print('Процесс продолжил выполнение кода')
+        sleep(1)
+        print('Процесс завершает работу')
+        exit(0)
 
 
 # Define producer fn
-def producer(cv):
-    logging.debug('Producer thread started ...')
+def makeResourceAvailable(cv):
     with cv:
-        logging.debug('Making resource available')
-        logging.debug('Notifying to all consumers')
+        print('Отправляем событие "Ресурс доступен"')
         cv.notifyAll()
 
 
 # Create condition (with RLock as default lock)
 condition = threading.Condition()
-cs1 = threading.Thread(
-    name='consumer1', target=consumer, args=(condition,))
-cs2 = threading.Thread(
-    name='consumer2', target=consumer, args=(condition,))
-pd = threading.Thread(name='producer', target=producer, args=(condition,))
+
+consumerThread1 = threading.Thread(
+    name='consumer1', target=client, args=(condition,))
+consumerThread2 = threading.Thread(
+    name='consumer2', target=client, args=(condition,))
+orchestratorThread = threading.Thread(name='producer', target=makeResourceAvailable, args=(condition,))
 
 
 # Run code
-cs1.start()
-time.sleep(2)
-cs2.start()
-time.sleep(2)
-pd.start()
+consumerThread1.start()
+sleep(2)
+consumerThread2.start()
+sleep(2)
+orchestratorThread.start()
+
+if __name__ == "__main__":
+    print(colored('OK', 'green'))
+    exit(0)

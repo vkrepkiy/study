@@ -1,8 +1,12 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+# coding: utf-8
 
 # Mutual exclusion demonstration on Python 3 with Lock
 
+from termcolor import colored
 from threading import Lock, Thread
+
+print("Программа выполняет сложение и вычитание с использованием общих ресурсов\n")
 
 # Use Lock as Mutex
 lockAsMutex = Lock()
@@ -12,7 +16,6 @@ shared_int = 0
 repeatOperationLimit = 100000
 # Setup times to run tests
 repeatTestLimit = 10
-
 
 # Append number
 def add(value, useMutex):
@@ -71,32 +74,39 @@ def runWithoutMutex():
 
 
 # Run tests for Mutex
-print('Start tests, each time the result should equal 0')
-error = False
+print('Запуск тестов. Результат, отличный от 0 считается некорректным')
+print(colored('Запуск тестов с применением мьютексов', 'yellow'))
+hasError = False
 for i in range(repeatTestLimit):
     result = runWithMutex()
     if result != 0:
-        error = result
+        hasError = True
 
-if error:
-    print('Mutex has failed, it can not be: ', error)
+if hasError:
+    print(colored('Что-то пошло не так.', 'red'))
 else:
-    print('Mutex succeed')
+    print(colored('ОК', 'green'))
+
+print('Результат равен', result)
 
 # Reset vars
-error = False
+hasError = False
 shared_int = 0
 
 # Run tests without Mutex
-error = False
+print(colored('Запуск тестов без мьютексов', 'yellow'))
+hasError = False
 for i in range(repeatTestLimit):
     result = runWithoutMutex()
     if result != 0:
-        error = result
+        hasError = True
 
-if error:
-    print('You\'d better use mutex: ', error)
+if hasError:
+    print(colored('Что-то пошло не так.', 'red'))
 else:
-    print('No Mutex, you are lucky!')
+    print(colored('ОК', 'green'))
 
-exit(0)
+print('Результат равен', result)
+
+if __name__ == "__main__":
+    exit(0)
