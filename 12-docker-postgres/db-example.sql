@@ -1,0 +1,3 @@
+-- DML
+-- Get all vehicle drivers names
+-- Get all trucks on duty with assigned drivers
