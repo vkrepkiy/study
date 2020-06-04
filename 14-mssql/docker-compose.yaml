@@ -1,0 +1,21 @@
+version: "3"
+services:
+  db_1:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    env_file:
+      - db.env
+    volumes:
+      - 14_mssql_1:/var/opt/mssql
+    ports:
+      - 1433:1433
+  db_2:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    env_file:
+      - db.env
+    volumes:
+      - 14_mssql_2:/var/opt/mssql
+    ports:
+      - 1434:1433
+volumes:
+  14_mssql_1:
+  14_mssql_2:

@@ -1,28 +1,31 @@
--- generate some object geometries
-INSERT INTO vkgis.obj_geometry ("length_mm", "width_mm", "height_mm")
-  VALUES (4384, 1927, 1465), (8210, 2210, 2550), (5540, 2380, 2200);
+-- set schema as default
+SET search_path TO vkgis;
 
--- generate a lot of fake object types
-INSERT INTO vkgis.obj_type ("name")
-SELECT
-  'obj_type_' || seq
-FROM
-  GENERATE_SERIES(1, 10) seq;
+-- generate some object geometries
+INSERT INTO obj_geometry (length_mm, width_mm, height_mm, note)
+  VALUES (4384, 1927, 1465, 'volkswagen polo'), (8210, 2210, 2550, 'evakuator'), (5540, 2380, 2200, 'Skoraya pomosh');
 
 -- generate some familiar object types
-INSERT INTO vkgis.obj_type ("name", obj_geometry_id)
-  VALUES ('parkon', 1), ('tow truck', 2), ('police', 1), ('ambulance', 3), ('building', NULL);
+INSERT INTO obj_group (name_short, left_key, right_key)
+  VALUES ('parkon', '1', '2'), ('tow truck', '3', '4'), ('police', '5', '6'), ('ambulance', '7', '8'), ('building', '9', '10');
 
 --- create objects
-INSERT INTO vkgis.obj (obj_type_id, name)
+INSERT INTO obj (name_short)
 SELECT
-  random() * 14 + 1,
   'obj_' || seq
 FROM
   generate_series(1, 10001) seq;
 
+-- obj to group
+INSERT INTO obj_to_group (obj_id, obj_group_id)
+SELECT
+  seq,
+  random() * 4 + 1
+FROM
+  generate_series(1, 10001) seq;
+
 -- generate object positions
-INSERT INTO vkgis.obj_position (lat, lng, ts, obj_id)
+INSERT INTO obj_position (lat, lng, ts, obj_id)
 SELECT
   55 + random(),
   56 + random(),
@@ -32,11 +35,11 @@ FROM
   generate_series('2020-01-01', '2020-04-13', interval '1 minute') AS gs;
 
 -- create occupations
-INSERT INTO vkgis.occupation (name)
+INSERT INTO occupation (name_short)
   VALUES ('Sysadmin'), ('Driver'), ('Operator'), ('Chief security officer'), ('Junior security officer');
 
 -- create employees
-INSERT INTO vkgis.employee (first_name, last_name)
+INSERT INTO employee (first_name, last_name)
 SELECT
   (
     CASE (RANDOM() * 2)::int
@@ -60,7 +63,7 @@ FROM
   generate_series(1, 100);
 
 -- employee to occupation
-INSERT INTO vkgis.employee_to_occupation (employee_id, occupation_id)
+INSERT INTO employee_to_occupation (employee_id, occupation_id)
 SELECT
   seq,
   random() * 4 + 1
@@ -68,11 +71,11 @@ FROM
   generate_series(1, 100) AS seq;
 
 -- schedules
-INSERT INTO vkgis.schedule (repeat, name)
+INSERT INTO schedule (schedule_cron, name_short)
   VALUES ('0 12 * * 1-5', '5/2 working week'), ('0 09 */2 * *', '2/2 schedule');
 
 -- drive
-INSERT INTO vkgis.drive (obj_id, employee_id, schedule_id)
+INSERT INTO drive (obj_id, employee_id, schedule_id)
 SELECT
   random() * 10000 + 1,
   random() * 99 + 1,
