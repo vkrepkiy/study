@@ -1,0 +1,12 @@
+version: "3"
+services:
+  db:
+    build:
+      context: .
+      dockerfile: "db.dockerfile"
+    env_file:
+      - db.env
+    volumes:
+      - ./dbvolume:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
