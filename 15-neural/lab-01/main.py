@@ -20,7 +20,7 @@ test_labels = keras.utils.to_categorical(test_labels, 10)
 
 # Create model and compile
 model = keras.models.Sequential()
-model.add(keras.layers.Dense(800, input_dim=784, activation="relu"))
+model.add(keras.layers.Dense(6000, input_dim=784, activation="relu"))
 model.add(keras.layers.Dense(400, activation="relu"))
 model.add(keras.layers.Dense(10, activation="softmax"))
 model.compile(loss="categorical_crossentropy",
@@ -29,15 +29,13 @@ model.compile(loss="categorical_crossentropy",
 # Show model summary
 print(model.summary())
 
-# 88.53
-# Run training at 100 epochs
+# Run training
 history = model.fit(
     train_images,
     train_labels,
     batch_size=50,
-    epochs=150,
-    validation_split=0.1,
-    callbacks=tf.keras.callbacks.EarlyStopping(patience=10)
+    epochs=500,
+    validation_split=0.1
 )
 
 # Оцениваем качество обучения сети на тестовых данных
