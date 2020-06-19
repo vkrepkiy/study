@@ -1,4 +1,5 @@
 import numpy
+import datetime
 from tensorflow import keras, config
 
 # Fix memory issue,
@@ -49,14 +50,15 @@ model.add(keras.layers.Dense(10, activation='softmax'))
 
 print(model.summary())
 
-sgd = keras.optimizers.SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
+sgd = keras.optimizers.SGD(
+    learning_rate=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy',
               optimizer=sgd,
               metrics=['accuracy'])
 
 model.fit(train_images, train_labels,
           batch_size=32,
-          epochs=25,
+          epochs=50,
           validation_split=0.1,
           shuffle=True)
 
