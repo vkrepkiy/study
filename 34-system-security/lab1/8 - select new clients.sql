@@ -11,3 +11,7 @@ select
     convert(nvarchar, DecryptByKey(Crypt_name_firm)) as [Company Name]
 from client
 where key_client like ('NEWC%')
+
+go
+
+close all symmetric keys
