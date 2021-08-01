@@ -1,4 +1,8 @@
+!.vscode/launch.json
 .vscode
+.history
+node_modules
+out
 
 dist/
 bin/
