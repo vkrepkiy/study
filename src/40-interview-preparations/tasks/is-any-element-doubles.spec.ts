@@ -1,3 +1,5 @@
+import { isElementsInArrDoubles } from "./is-any-element-doubles";
+
 describe(`\
 Given an array of positive integers, write a function that \
 returns true if any element in that array is the double of \
@@ -12,21 +14,6 @@ any other element.
   ];
 
   it.each(inout)("check", (input, output) => {
-    expect(exec(input)).toBe(output);
+    expect(isElementsInArrDoubles(input)).toBe(output);
   });
-
-  function exec(input: number[]): boolean {
-    if (input.length < 2) {
-      return false;
-    }
-
-    for (let i = 0; i < input.length; i++) {
-      for (let x = i; x < input.length; x++) {
-        if (input[i] === input[x] / 2 || input[i] === input[x] * 2) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }
 });

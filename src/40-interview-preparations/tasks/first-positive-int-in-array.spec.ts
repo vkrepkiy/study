@@ -1,3 +1,5 @@
+import { findFirstFreePositiveInt } from "./first-positive-int-in-array";
+
 describe(`Find the first positive integer that is not included in the array`, () => {
   test.each([
     [[-10, 5, -9, 4, -8, 3, 0, 2, 0], 1],
@@ -7,17 +9,3 @@ describe(`Find the first positive integer that is not included in the array`, ()
     expect(findFirstFreePositiveInt(input)).toBe(result);
   });
 });
-
-function findFirstFreePositiveInt(arr: number[]): number {
-  arr = arr
-    .sort((a, b) => a - b)
-    .filter((val, i, array) => val > 0 && val !== array[i - 1]);
-
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] !== i + 1) {
-      return i + 1;
-    }
-  }
-
-  return arr.length + 1;
-}
