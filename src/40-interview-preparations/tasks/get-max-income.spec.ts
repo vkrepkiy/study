@@ -1,4 +1,4 @@
-import { getMaximumIncome } from "./maximize-income";
+import { getMaximumIncome } from "./get-max-income";
 
 describe(`\
 Верните максимальную прибыль от котировок акций. Котировки акций хранятся в массиве по дате. \
