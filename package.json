@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "jest": "jest"
+    "jest": "jest",
+    "tsc": "tsc"
   },
   "devDependencies": {
     "prettier": "^2.3.2",
