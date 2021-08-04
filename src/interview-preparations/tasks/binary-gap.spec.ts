@@ -1,10 +1,10 @@
 describe("binary-gap", () => {
   it.each([[32, 0]])("should work", (n, expected) => {
-    expect(solution(n)).toBe(expected);
+    expect(findBinaryGap(n)).toBe(expected);
   });
 });
 
-function solution(n: number) {
+function findBinaryGap(n: number) {
   const str = n.toString(2);
   let gapStart = -1;
   let maxGap = 0;
