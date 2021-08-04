@@ -52,13 +52,13 @@ function findMedianSortedArrays(numsA: number[], numsB: number[]): number {
   throw new Error("something went wrong, median not found?");
 }
 
-describe("", () => {
+describe("Median of sorted arrays", () => {
   it.each(<[[number[], number[]], number][]>[
     [[[], [1]], 1],
     [[[1], [2]], 1.5],
     [[[1], [2, 3]], 2],
     [[[1, 2, 3, 4], []], 2.5],
-  ])("", (input, expected) => {
+  ])("should work", (input, expected) => {
     expect(findMedianSortedArrays(...input)).toBe(expected);
   });
 });

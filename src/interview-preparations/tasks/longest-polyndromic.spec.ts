@@ -29,7 +29,7 @@ function isPalindrome(s: string): boolean {
   return true;
 }
 
-describe("", () => {
+describe("longest polyndromic", () => {
   it.each([
     ["babad", "bab"],
     ["cbbd", "bb"],
@@ -37,7 +37,7 @@ describe("", () => {
     ["ac", "a"],
     ["bb", "bb"],
     ["bbbbbbb", "bbbbbbb"],
-  ])("", (input, expected) => {
+  ])("should work", (input, expected) => {
     expect(longestPalindrome(input)).toBe(expected);
   });
 });

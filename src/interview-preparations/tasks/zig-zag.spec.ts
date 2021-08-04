@@ -20,8 +20,8 @@ function convert(s: string, numRows: number): string {
   return rows.join("");
 }
 
-describe("", () => {
-  it("", () => {
+describe("Zig zag", () => {
+  it("should work", () => {
     expect(convert("PAYPALISHIRING", 3)).toBe("PAHNAPLSIIGYIR");
     expect(convert("PAYPALISHIRING", 4)).toBe("PINALSIGYAHRPI");
   });
