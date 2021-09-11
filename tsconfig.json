@@ -6,7 +6,9 @@
     "module": "commonjs",
     "outDir": "out",
     "sourceMap": true,
-    "lib": ["es2020"]
+    "lib": ["es2020"],
+    "downlevelIteration": true
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "out/"],
+  "include": ["src/**/*.ts"]
 }
