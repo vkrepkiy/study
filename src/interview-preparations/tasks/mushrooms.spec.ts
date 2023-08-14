@@ -11,7 +11,7 @@ picker can collect in m moves`, () => {
   it("should work", () => {});
 });
 
-function getMax(arr: number[], position: number, stepLimit: number): number {
+function getMax(arr: number[], position: number, stepLimit: number) {
   const sumPrefixLeft = arr
     .slice(0, position)
     .reverse()
