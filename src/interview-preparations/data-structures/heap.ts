@@ -1,5 +1,5 @@
 /**
- * Heap should have inariant (child value is equal or bigger / less than parent – Min heap/Max heap)
+ * Heap should have invariant (child value is equal or bigger / less than parent – Min heap/Max heap)
  * Binary heap may be represented as an array with the following index logic:
  *
  *        0

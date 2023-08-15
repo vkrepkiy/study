@@ -1,7 +1,7 @@
 import { binarySearch, mergeSort } from "./array";
 
 describe("Array playground", () => {
-  const inout: [
+  const input: [
     { input: number[]; searchValue: number; searchResult: boolean }
   ][] = [
     [
@@ -48,11 +48,11 @@ describe("Array playground", () => {
     ],
   ];
 
-  it.each(inout)("merge sort", (data) => {
+  it.each(input)("merge sort", (data) => {
     expect(mergeSort(data.input)).toEqual(data.input.sort((a, b) => a - b));
   });
 
-  it.each(inout)("binary search", (data) => {
+  it.each(input)("binary search", (data) => {
     expect(binarySearch(data.input, data.searchValue)).toBe(data.searchResult);
   });
 });
