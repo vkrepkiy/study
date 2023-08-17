@@ -1,3 +1,7 @@
+/**
+ * We should find "golden customers" which are appeared to be in all datasets
+ */
+
 it.each(<[string, number[]][]>[
   ["[[1,6,5],[2,1,4,5],[1,6,5,4],[1,3,4,5]]", [1, 5]],
   ["[]", []],

@@ -1,3 +1,13 @@
+/**
+ * If I remember correctly:
+ *
+ * We need to find the best place to build a shop
+ * 1 - represents building, 0 - just some space
+ * we should find the best places (with most buildings around in K radius) to build a shop
+ *
+ * return amount of such best places to build a shop
+ */
+
 it.each(<[number, number[][], number][]>[
   [
     2,
@@ -43,7 +53,10 @@ function solution(k: number, matrix: number[][]): number {
   let totalHouses = 0;
   let candidates = new Map<string, number>();
 
+  // go through each cell, by axis
+  // iterate rows
   for (let y = 0; y < matrix.length; y++) {
+    // iterate columns in the row
     for (let x = 0; x < matrix[y].length; x++) {
       // get all available points for the house
       if (matrix[y][x] === 1) {
@@ -73,18 +86,28 @@ function solution(k: number, matrix: number[][]): number {
 
 /**
  * Get available cells in K range
+ * @param k represents range
+ *
+ * @returns coordinates of the surrounding buildings in K range (exclude building itself)
  *
  */
-function peekCandidates(y: number, x: number, k: number, matrix: number[][]) {
+function peekCandidates(
+  y: number,
+  x: number,
+  k: number,
+  matrix: number[][]
+): Set<[number, number]> {
   // [[1,2], [5,5], ...]
   let result = new Set<[number, number]>();
 
-  let maxY = matrix.length - 1;
-  let maxX = matrix[0]?.length - 1 || 0;
+  let maxY = matrix.length - 1; // get global row limit for matrix
+  let maxX = matrix[0]?.length - 1 || 0; // get global col limit for matrix
 
+  // get min and max for range K to iterate rows
   let yMin = Math.max(0, y - k);
   let yMax = Math.min(maxY, y + k);
 
+  // get mn and max for range K to iterate cells
   let xMin = Math.max(0, x - k);
   let xMax = Math.min(maxX, x + k);
 
